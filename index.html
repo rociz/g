@@ -20,7 +20,7 @@ html, body {
 
 
 	
-<canvas id="myCanvas" onload ="move()" onclick = "clickfunc()" onkeydown="uniKeyCode(event)" width="800" height="400" style=" padding-left: 0;
+<canvas id="myCanvas" onload ="move()"  onkeydown="uniKeyCode(event)" width="800" height="400" style=" padding-left: 0;
     padding-right: 0;
     margin-left: auto;
     margin-right: auto;
@@ -34,12 +34,10 @@ html, body {
 
 <script>
 
-
 var myVar = setInterval(move, 20);
 
 
-function clickfunc(){
-}
+
 
 var c = document.getElementById("myCanvas");
    
@@ -55,6 +53,19 @@ h = window.innerHeight;
 
 };
 
+var mosx = 0;
+var mosy = 0;
+function getCursorPosition(canvas, event) {
+    const rect = canvas.getBoundingClientRect()
+    mosx = event.clientX - rect.left
+    mosy = event.clientY - rect.top
+    console.log("x: " + x + " y: " + y)
+}
+
+const canvas = document.querySelector('canvas')
+canvas.addEventListener('mousedown', function(e) {
+    getCursorPosition(canvas, e)
+})
 
 
 function move() {
@@ -65,7 +76,8 @@ var bgimg = document.getElementById("grassland");
 ctx.drawImage(bgimg, 0, 0,800,400);
 
 
-
+ctx.font = "30px Arial";
+ctx.fillText("x: " + mosx + "," + " y: " + mosy, 10, 50);
 
 }//End of FUNCTION
 
