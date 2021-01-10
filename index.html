@@ -14,7 +14,7 @@ html, body {
 
 
 </head>
-<body style="background-color:lightblue;">
+<body onclick= "clickFunc()" style="background-color:lightblue;">
 
 <h1 style="color:white;" id="demo"></h1>
 
@@ -38,6 +38,31 @@ var myVar = setInterval(move, 20);
 
 
 
+function sound(src) {
+   this.sound = document.createElement("audio");
+   this.sound.src = src;
+   this.sound.setAttribute("preload", "auto");
+   this.sound.setAttribute("controls", "none");
+   this.sound.style.display = "none";
+   document.body.appendChild(this.sound);
+   this.play = function(){
+       this.sound.play();
+   }
+   this.stop = function(){
+       this.sound.pause();
+   }   
+}
+
+var clicks = 0;
+function clickFunc(){
+clicks++;
+
+if (clicks == 1){
+myMusic = new sound("epic.mp3");
+myMusic.play();
+}
+}
+
 
 var c = document.getElementById("myCanvas");
    
@@ -59,7 +84,6 @@ function getCursorPosition(canvas, event) {
     const rect = canvas.getBoundingClientRect()
     mosx = event.clientX - rect.left
     mosy = event.clientY - rect.top
-    console.log("x: " + x + " y: " + y)
 }
 
 const canvas = document.querySelector('canvas')
@@ -108,6 +132,8 @@ ctx.fillText("x: " + mosx.toFixed(0) + "," + " y: " + mosy.toFixed(0), 10, 40);
   }
 
 
+
+
 </script>
 
 
@@ -117,7 +143,5 @@ ctx.fillText("x: " + mosx.toFixed(0) + "," + " y: " + mosy.toFixed(0), 10, 40);
 <div style='padding: 20px; width:100%; text-align:center;'>{footer}</div>
 </body>
 </html>
-
-
 
 
