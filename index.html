@@ -14,7 +14,7 @@ html, body {
 
 
 </head>
-<body style="background-color:black;">
+<body style="background-color:lightblue;">
 
 <h1 style="color:white;" id="demo"></h1>
 
@@ -68,16 +68,29 @@ canvas.addEventListener('mousedown', function(e) {
 })
 
 
+var px = 300;
+var py = 270;
 function move() {
 
 
 //Background Image
 var bgimg = document.getElementById("grassland");
-ctx.drawImage(bgimg, 0, 0,800,400);
+ctx.fillStyle = '#49c9e3';
+ctx.fillRect(0, 0, 800, 400);
+
+ctx.fillStyle = 'black';
+ctx.fillRect(0, 300, 800, 400);
+
+ctx.fillStyle = 'red';
+ctx.fillRect(px, py, 30, 30);
+
+if (px > mosx){px = px - 5;}
+if (px < mosx){px = px + 5;}
 
 
-ctx.font = "30px Arial";
-ctx.fillText("x: " + mosx + "," + " y: " + mosy, 10, 50);
+ctx.font = "20px Arial";
+ctx.fillStyle = 'black';
+ctx.fillText("x: " + mosx + "," + " y: " + mosy, 10, 40);
 
 }//End of FUNCTION
 
@@ -104,5 +117,8 @@ ctx.fillText("x: " + mosx + "," + " y: " + mosy, 10, 50);
 <div style='padding: 20px; width:100%; text-align:center;'>{footer}</div>
 </body>
 </html>
+
+
+
 
 
