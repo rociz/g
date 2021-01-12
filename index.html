@@ -77,7 +77,7 @@ function getCursorPosition(canvas, event) {
 const canvas = document.querySelector('canvas')
 canvas.addEventListener('mousedown', function(e) {
     gravity = gravity + 1; 
-	if (scene == 0){console.log(firstlevel.currentTime);}
+	//if (scene == 0){console.log(firstlevel.currentTime);}
 	if (gravity == 2){gravity = 0;}
 	scene = 1; 
     getCursorPosition(canvas, e)
@@ -128,50 +128,27 @@ blockArray.push(new block(1330,250,40,50));
 
 blockArray.push(new block(1420,100,40,100));
 
-blockArray.push(new block(1710,200,40,100));
+//END OF INTRO
 
-blockArray.push(new block(1830,100,40,100));
+blockArray.push(new block(1700,200,40,100));
 
+blockArray.push(new block(1805,100,40,100));
 
-blockArray.push(new block(1950,200,40,100));
+blockArray.push(new block(1935,200,40,100));
 
-blockArray.push(new block(2070,100,40,100));
+blockArray.push(new block(2060,100,40,100));
 
-blockArray.push(new block(2170,200,40,100));
+blockArray.push(new block(2190,220,40,80));
 
-blockArray.push(new block(2270,100,40,100));
+blockArray.push(new block(2185,100,200,30));
 
-blockArray.push(new block(2370,200,40,100));
+blockArray.push(new block(2305,220,40,80));
 
-blockArray.push(new block(2470,100,40,100));
+blockArray.push(new block(2430,100,40,100));
 
-blockArray.push(new block(2570,200,40,100));
-
-
-blockArray.push(new block(2670,100,40,100));
-
-blockArray.push(new block(2770,200,40,100));
-
-blockArray.push(new block(2870,100,40,100));
-
-blockArray.push(new block(2970,200,40,100));
+blockArray.push(new block(2555,200,40,100));
 
 
-blockArray.push(new block(3070,100,40,100));
-
-blockArray.push(new block(3170,200,40,100));
-
-blockArray.push(new block(3270,100,40,100));
-
-blockArray.push(new block(3370,200,40,100));
-
-blockArray.push(new block(3470,100,40,100));
-
-blockArray.push(new block(3570,200,40,100));
-
-blockArray.push(new block(3670,100,40,100));
-
-blockArray.push(new block(3770,200,40,100));
 
 var px = 300;
 var py = 270;
@@ -196,8 +173,10 @@ function move() {
 
 if (scene == 0){
 
-ctx.fillStyle = 'blue';
-ctx.fillRect(0, 0, 800, 400);
+
+ctx.font = "80px Arial";
+ctx.fillStyle = 'white';
+ctx.fillText("PRESS TO PLAY", 80, 240);
 
 gravity = -1;
 }
@@ -251,7 +230,7 @@ ctx.fillText(firstlevel.currentTime.toFixed(2), 10, 70);
   gravity = gravity + 1; 
 if (gravity == 2){gravity = 0;}
 
-//console.log(firstlevel.currentTime);
+console.log("Time: " + firstlevel.currentTime + "s" + " Drift: " + drift);
  
  }//End of keydown function
  
