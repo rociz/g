@@ -77,6 +77,7 @@ function getCursorPosition(canvas, event) {
 const canvas = document.querySelector('canvas')
 canvas.addEventListener('mousedown', function(e) {
     gravity = gravity + 1; 
+	if (scene == 0){console.log(firstlevel.currentTime);}
 	if (gravity == 2){gravity = 0;}
 	scene = 1; 
     getCursorPosition(canvas, e)
@@ -100,7 +101,7 @@ block.prototype.draw = function() {
 	
 	if (px + 30 > this.x - drift && px < this.x - drift + this.w){
 		if (py >= this.y && py + 30 <= this.y + this.h){
-		end = 1;
+		firstlevel.pause(); firstlevel.currentTime = 0; drift = 0; px = 300; py = 270; gravity = 1; scene = 0;
 		}
 	}
 };
@@ -153,12 +154,13 @@ if (scene == 0){
 
 ctx.fillStyle = 'blue';
 ctx.fillRect(0, 0, 800, 400);
+
+gravity = -1;
 }
 
 if (scene == 1){
 drift = drift + speed;
 
-if (end == 1){firstlevel.pause(); firstlevel.currentTime = 0; drift = 0; end = 0; px = 300; py = 270; gravity = 1; scene = 0;}
 //Background Image
 var bgimg = document.getElementById("grassland");
 
@@ -202,6 +204,8 @@ ctx.fillText(firstlevel.currentTime.toFixed(2), 10, 70);
  //Move events
  document.onkeydown = function(e) {
 
+  gravity = gravity + 1; 
+if (gravity == 2){gravity = 0;}
  
  }//End of keydown function
  
@@ -221,5 +225,4 @@ ctx.fillText(firstlevel.currentTime.toFixed(2), 10, 70);
 <div style='padding: 20px; width:100%; text-align:center;'>{footer}</div>
 </body>
 </html>
-
 
