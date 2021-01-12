@@ -30,38 +30,27 @@ html, body {
 
 <img id="grassland"  style="visibility:hidden" src="https://i.imgur.com/R06cI4d.png" alt="">
 
+<audio id="myAudio">
+  <source src="firstlevel.mp3" type="audio/mp3">
+</audio>
 
 
 <script>
 
 var myVar = setInterval(move, 20);
 
+var firstlevel = document.getElementById("myAudio"); 
 
-
-function sound(src) {
-   this.sound = document.createElement("audio");
-   this.sound.src = src;
-   this.sound.setAttribute("preload", "auto");
-   this.sound.setAttribute("controls", "none");
-   this.sound.style.display = "none";
-   document.body.appendChild(this.sound);
-   this.play = function(){
-       this.sound.play();
-   }
-   this.stop = function(){
-       this.sound.pause();
-   }   
-}
 
 var clicks = 0;
 function clickFunc(){
+
 clicks++;
 
-if (clicks == 1){
-myMusic = new sound("epic.mp3");
-myMusic.play();
+firstlevel.play();
+
 }
-}
+
 
 
 var c = document.getElementById("myCanvas");
@@ -88,33 +77,121 @@ function getCursorPosition(canvas, event) {
 
 const canvas = document.querySelector('canvas')
 canvas.addEventListener('mousedown', function(e) {
+    gravity = gravity + 1; 
+	if (gravity == 2){gravity = 0;}
+	scene = 1; 
     getCursorPosition(canvas, e)
 })
 
 
+var blockArray = [];
+
+
+var block = function(x,y,w,h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    
+};
+
+block.prototype.draw = function() {
+    ctx.fillStyle = "red";
+    ctx.fillRect(this.x - drift, this.y, this.w, this.h);
+	
+	if (px + 30 > this.x - drift && px < this.x - drift + this.w){
+		if (py >= this.y && py + 30 <= this.y + this.h){
+		end = 1;
+		}
+	}
+};
+
+blockArray.push(new block(730,200,40,100));
+
+blockArray.push(new block(830,100,40,100));
+
+
+blockArray.push(new block(930,200,40,100));
+
+blockArray.push(new block(1030,100,40,100));
+
+blockArray.push(new block(1130,100,40,100));
+
+blockArray.push(new block(1230,250,40,50));
+
+blockArray.push(new block(1330,100,40,100));
+
+blockArray.push(new block(1400,250,40,50));
+
+blockArray.push(new block(1490,100,40,100));
+
+
+
 var px = 300;
 var py = 270;
+
+var gravity = 1; 
+var end = 0; 
+var drift = 0; 
+
+var speed = 5;
+
+var scene = 0; 
+
+function playAudio() { 
+  x.play(); 
+} 
+
+function pauseAudio() { 
+  x.pause(); 
+} 
+
 function move() {
 
+if (scene == 0){
 
+ctx.fillStyle = 'blue';
+ctx.fillRect(0, 0, 800, 400);
+}
+
+if (scene == 1){
+drift = drift + speed;
+
+if (end == 1){firstlevel.pause(); firstlevel.currentTime = 0; drift = 0; end = 0; px = 300; py = 270; gravity = 1; scene = 0;}
 //Background Image
 var bgimg = document.getElementById("grassland");
+
 ctx.fillStyle = '#49c9e3';
 ctx.fillRect(0, 0, 800, 400);
 
 ctx.fillStyle = 'black';
 ctx.fillRect(0, 300, 800, 400);
 
-ctx.fillStyle = 'red';
+ctx.fillStyle = 'black';
+ctx.fillRect(0, -300, 800, 400);
+
+ctx.fillStyle = 'blue';
 ctx.fillRect(px, py, 30, 30);
 
-if (px > mosx){px = px - 5;}
-if (px < mosx){px = px + 5;}
 
+if (gravity == 1){py = py - 10;}
+if (gravity == 0){py = py + 10;}
+
+if (py + 30 > 300){py = py - 10;}
+
+if (py < 100){py = py + 10;}
+
+
+for(var i = 0; i < blockArray.length ; i++) {
+        blockArray[i].draw();
+}
 
 ctx.font = "20px Arial";
-ctx.fillStyle = 'black';
+ctx.fillStyle = 'white';
 ctx.fillText("x: " + mosx.toFixed(0) + "," + " y: " + mosy.toFixed(0), 10, 40);
+ctx.fillText(end, 10, 70);
+
+}
 
 }//End of FUNCTION
 
