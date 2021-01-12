@@ -30,6 +30,11 @@ html, body {
 
 <img id="grassland"  style="visibility:hidden" src="https://i.imgur.com/R06cI4d.png" alt="">
 
+<img id="upCube"  style="visibility:hidden" src="https://i.imgur.com/9CbJ5Jf.png" alt="">
+<img id="downCube"  style="visibility:hidden" src="https://i.imgur.com/zIby1pB.png" alt="">
+
+
+
 <audio id="myAudio">
   <source src="firstlevel.mp3" type="audio/mp3">
 </audio>
@@ -96,8 +101,15 @@ var block = function(x,y,w,h) {
 };
 
 block.prototype.draw = function() {
-    ctx.fillStyle = "red";
+    
+	if (gravity == 1){ctx.fillStyle = "green";}
+    else{ctx.fillStyle = "#781b04";}
     ctx.fillRect(this.x - drift, this.y, this.w, this.h);
+	
+	ctx.lineWidth = 5;
+    if (gravity == 1){ctx.strokeStyle = "#42f560";}
+	else {ctx.strokeStyle = "red";}
+    ctx.strokeRect(this.x - drift, this.y, this.w, this.h);
 	
 	if (px + 30 > this.x - drift && px < this.x - drift + this.w){
 		if (py >= this.y && py + 30 <= this.y + this.h){
@@ -184,20 +196,25 @@ gravity = -1;
 if (scene == 1){
 drift = drift + speed;
 
-//Background Image
-var bgimg = document.getElementById("grassland");
-
-ctx.fillStyle = '#49c9e3';
+//BG
+ctx.fillStyle = 'black';
 ctx.fillRect(0, 0, 800, 400);
 
-ctx.fillStyle = 'black';
-ctx.fillRect(0, 300, 800, 400);
+ctx.strokeStyle = "white";
+ctx.fillStyle = 'gray';
+ctx.fillRect(0, 305, 800, 400);
+ctx.strokeRect(0, 305, 800, 400);
 
-ctx.fillStyle = 'black';
-ctx.fillRect(0, -300, 800, 400);
+ctx.fillStyle = 'gray';
+ctx.strokeRect(0, -300, 800, 395);
+ctx.fillRect(0, -300, 800, 395);
 
 ctx.fillStyle = 'blue';
+	ctx.lineWidth = 3;
+
 ctx.fillRect(px, py, 30, 30);
+ctx.strokeRect(px, py, 30, 30);
+
 
 
 if (gravity == 1){py = py - 10;}
