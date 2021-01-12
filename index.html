@@ -37,7 +37,7 @@ html, body {
 
 <script>
 
-var myVar = setInterval(move, 10);
+var myVar = setInterval(move, 20);
 
 var firstlevel = document.getElementById("myAudio"); 
 
@@ -128,6 +128,50 @@ blockArray.push(new block(1330,250,40,50));
 
 blockArray.push(new block(1420,100,40,100));
 
+blockArray.push(new block(1710,200,40,100));
+
+blockArray.push(new block(1830,100,40,100));
+
+
+blockArray.push(new block(1950,200,40,100));
+
+blockArray.push(new block(2070,100,40,100));
+
+blockArray.push(new block(2170,200,40,100));
+
+blockArray.push(new block(2270,100,40,100));
+
+blockArray.push(new block(2370,200,40,100));
+
+blockArray.push(new block(2470,100,40,100));
+
+blockArray.push(new block(2570,200,40,100));
+
+
+blockArray.push(new block(2670,100,40,100));
+
+blockArray.push(new block(2770,200,40,100));
+
+blockArray.push(new block(2870,100,40,100));
+
+blockArray.push(new block(2970,200,40,100));
+
+
+blockArray.push(new block(3070,100,40,100));
+
+blockArray.push(new block(3170,200,40,100));
+
+blockArray.push(new block(3270,100,40,100));
+
+blockArray.push(new block(3370,200,40,100));
+
+blockArray.push(new block(3470,100,40,100));
+
+blockArray.push(new block(3570,200,40,100));
+
+blockArray.push(new block(3670,100,40,100));
+
+blockArray.push(new block(3770,200,40,100));
 
 var px = 300;
 var py = 270;
@@ -136,7 +180,7 @@ var gravity = 1;
 var end = 0; 
 var drift = 0; 
 
-var speed = 2.5;
+var speed = 5;
 
 var scene = 0; 
 
@@ -177,12 +221,12 @@ ctx.fillStyle = 'blue';
 ctx.fillRect(px, py, 30, 30);
 
 
-if (gravity == 1){py = py - 5;}
-if (gravity == 0){py = py + 5;}
+if (gravity == 1){py = py - 10;}
+if (gravity == 0){py = py + 10;}
 
-if (py + 30 > 300){py = py - 5;}
+if (py + 30 > 300){py = py - 10;}
 
-if (py < 100){py = py + 5;}
+if (py < 100){py = py + 10;}
 
 
 for(var i = 0; i < blockArray.length ; i++) {
@@ -206,6 +250,8 @@ ctx.fillText(firstlevel.currentTime.toFixed(2), 10, 70);
 
   gravity = gravity + 1; 
 if (gravity == 2){gravity = 0;}
+
+//console.log(firstlevel.currentTime);
  
  }//End of keydown function
  
