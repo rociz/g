@@ -37,7 +37,7 @@ html, body {
 
 <script>
 
-var myVar = setInterval(move, 20);
+var myVar = setInterval(move, 10);
 
 var firstlevel = document.getElementById("myAudio"); 
 
@@ -46,7 +46,6 @@ var clicks = 0;
 function clickFunc(){
 
 clicks++;
-
 firstlevel.play();
 
 }
@@ -106,6 +105,9 @@ block.prototype.draw = function() {
 	}
 };
 
+
+blockArray.push(new block(300,100,400,50));
+
 blockArray.push(new block(730,200,40,100));
 
 blockArray.push(new block(830,100,40,100));
@@ -119,12 +121,11 @@ blockArray.push(new block(1130,100,40,100));
 
 blockArray.push(new block(1230,250,40,50));
 
-blockArray.push(new block(1330,100,40,100));
+blockArray.push(new block(1270,100,40,80));
 
-blockArray.push(new block(1400,250,40,50));
+blockArray.push(new block(1330,250,40,50));
 
-blockArray.push(new block(1490,100,40,100));
-
+blockArray.push(new block(1420,100,40,100));
 
 
 var px = 300;
@@ -134,7 +135,7 @@ var gravity = 1;
 var end = 0; 
 var drift = 0; 
 
-var speed = 5;
+var speed = 2.5;
 
 var scene = 0; 
 
@@ -174,12 +175,12 @@ ctx.fillStyle = 'blue';
 ctx.fillRect(px, py, 30, 30);
 
 
-if (gravity == 1){py = py - 10;}
-if (gravity == 0){py = py + 10;}
+if (gravity == 1){py = py - 5;}
+if (gravity == 0){py = py + 5;}
 
-if (py + 30 > 300){py = py - 10;}
+if (py + 30 > 300){py = py - 5;}
 
-if (py < 100){py = py + 10;}
+if (py < 100){py = py + 5;}
 
 
 for(var i = 0; i < blockArray.length ; i++) {
@@ -189,7 +190,7 @@ for(var i = 0; i < blockArray.length ; i++) {
 ctx.font = "20px Arial";
 ctx.fillStyle = 'white';
 ctx.fillText("x: " + mosx.toFixed(0) + "," + " y: " + mosy.toFixed(0), 10, 40);
-ctx.fillText(end, 10, 70);
+ctx.fillText(firstlevel.currentTime.toFixed(2), 10, 70);
 
 }
 
