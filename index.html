@@ -30,9 +30,14 @@ html, body {
 
 <img id="grassland"  style="visibility:hidden" src="https://i.imgur.com/R06cI4d.png" alt="">
 
-<img id="upCube"  style="visibility:hidden" src="https://i.imgur.com/9CbJ5Jf.png" alt="">
-<img id="downCube"  style="visibility:hidden" src="https://i.imgur.com/zIby1pB.png" alt="">
 
+<img id="titlescreen"  style="visibility:hidden" src="https://i.imgur.com/v9zanQV.png" alt="">
+
+<img id="bgbg"  style="visibility:hidden" src="https://i.imgur.com/1NHXSLr.png" alt="">
+
+<img id="cube"  style="visibility:hidden" src="https://i.imgur.com/W3QDlNg.png" alt="">
+
+<img id="cubeT1"  style="visibility:hidden" src="https://i.imgur.com/j5mk82m.png" alt="">
 
 
 <audio id="myAudio">
@@ -92,16 +97,18 @@ canvas.addEventListener('mousedown', function(e) {
 var blockArray = [];
 
 
-var block = function(x,y,w,h) {
+var block = function(x,y,w,h,v) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
+	this.v = v; 
     
 };
 
 block.prototype.draw = function() {
     
+	if (this.v != 0){
 	if (gravity == 1){ctx.fillStyle = "green";}
     else{ctx.fillStyle = "#781b04";}
     ctx.fillRect(this.x - drift, this.y, this.w, this.h);
@@ -110,16 +117,18 @@ block.prototype.draw = function() {
     if (gravity == 1){ctx.strokeStyle = "#42f560";}
 	else {ctx.strokeStyle = "red";}
     ctx.strokeRect(this.x - drift, this.y, this.w, this.h);
+	}
 	
-	if (px + 30 > this.x - drift && px < this.x - drift + this.w){
-		if (py >= this.y && py + 30 <= this.y + this.h){
-		firstlevel.pause(); firstlevel.currentTime = 0; drift = 0; px = 300; py = 270; gravity = 1; scene = 0;
+	
+	if (px + 35 > this.x - drift && px < this.x - drift + this.w){
+		if (py >= this.y && py + 10 <= this.y + this.h){
+		firstlevel.pause(); firstlevel.currentTime = 0; drift = 0; px = 300; py = 270; gravity = 1; scene = 0; lowGround = 300; highGround = 100;
 		}
 	}
 };
 
 
-blockArray.push(new block(300,100,400,50));
+blockArray.push(new block(250,100,400,50));
 
 blockArray.push(new block(730,200,40,100));
 
@@ -132,13 +141,16 @@ blockArray.push(new block(1030,100,40,100));
 
 blockArray.push(new block(1130,100,40,100));
 
-blockArray.push(new block(1230,250,40,50));
+blockArray.push(new block(1230,300,40,50));
 
-blockArray.push(new block(1270,100,40,80));
+blockArray.push(new block(1270,100,40,100));
 
-blockArray.push(new block(1330,250,40,50));
+blockArray.push(new block(1330,300,40,50));
 
 blockArray.push(new block(1420,100,40,100));
+
+blockArray.push(new block(1590,300,40,100,0));
+
 
 //END OF INTRO
 
@@ -150,11 +162,11 @@ blockArray.push(new block(1935,200,40,100));
 
 blockArray.push(new block(2060,100,40,100));
 
-blockArray.push(new block(2190,220,40,80));
+blockArray.push(new block(2190,240,40,60));
 
 blockArray.push(new block(2185,100,200,30));
 
-blockArray.push(new block(2305,220,40,80));
+blockArray.push(new block(2305,240,40,60));
 
 blockArray.push(new block(2430,100,40,100));
 
@@ -172,7 +184,11 @@ var drift = 0;
 var speed = 5;
 
 var scene = 0; 
+var grounded = 0;
 
+var lowGround = 300;
+
+var highGround = 100;
 function playAudio() { 
   x.play(); 
 } 
@@ -185,7 +201,7 @@ function move() {
 
 if (scene == 0){
 
-
+//ctx.drawImage(titlescreen,0,0,800,400);
 ctx.font = "80px Arial";
 ctx.fillStyle = 'white';
 ctx.fillText("PRESS TO PLAY", 80, 240);
@@ -200,29 +216,39 @@ drift = drift + speed;
 ctx.fillStyle = 'black';
 ctx.fillRect(0, 0, 800, 400);
 
+
 ctx.strokeStyle = "white";
 ctx.fillStyle = 'gray';
-ctx.fillRect(0, 305, 800, 400);
-ctx.strokeRect(0, 305, 800, 400);
+ctx.fillRect(-drift, 305, 1200, 400);
+ctx.strokeRect(-drift, 305, 1200, 400);
+
+ctx.fillRect(-drift + 1200,355,1200,400);
+ctx.strokeRect(-drift + 1200,355,1200,400);
+
+ctx.fillRect(-drift + 1600, 305, 1200, 400);
+ctx.strokeRect(-drift + 1600, 305, 1200, 400);
 
 ctx.fillStyle = 'gray';
 ctx.strokeRect(0, -300, 800, 395);
 ctx.fillRect(0, -300, 800, 395);
 
 ctx.fillStyle = 'blue';
-	ctx.lineWidth = 3;
+ctx.lineWidth = 3;
 
 ctx.fillRect(px, py, 30, 30);
 ctx.strokeRect(px, py, 30, 30);
 
-
-
 if (gravity == 1){py = py - 10;}
 if (gravity == 0){py = py + 10;}
 
-if (py + 30 > 300){py = py - 10;}
+if (py + 30 > lowGround){py = py - 10; grounded = 1;}
+else if (py < highGround){py = py + 10; grounded = 1;}
+else{grounded = 0;}
 
-if (py < 100){py = py + 10;}
+if (drift > 900){lowGround = 350;}
+if (drift > 1260){lowGround = 300;}
+
+
 
 
 for(var i = 0; i < blockArray.length ; i++) {
@@ -231,13 +257,14 @@ for(var i = 0; i < blockArray.length ; i++) {
 
 ctx.font = "20px Arial";
 ctx.fillStyle = 'white';
-ctx.fillText("x: " + mosx.toFixed(0) + "," + " y: " + mosy.toFixed(0), 10, 40);
-ctx.fillText(firstlevel.currentTime.toFixed(2), 10, 70);
+//ctx.fillText("x: " + mosx.toFixed(0) + "," + " y: " + mosy.toFixed(0), 10, 40);
+//ctx.fillText(firstlevel.currentTime.toFixed(2), 10, 70);
+
+ctx.fillText(drift, 10, 70);
 
 }
 
 }//End of FUNCTION
-
 
 
 
