@@ -143,7 +143,7 @@ blockArray.push(new block(1130,100,40,100));
 
 blockArray.push(new block(1230,300,40,50));
 
-blockArray.push(new block(1270,100,40,100));
+blockArray.push(new block(1270,100,40,80));
 
 blockArray.push(new block(1330,300,40,50));
 
@@ -162,15 +162,18 @@ blockArray.push(new block(1935,200,40,100));
 
 blockArray.push(new block(2060,100,40,100));
 
-blockArray.push(new block(2190,240,40,60));
+blockArray.push(new block(2190,290,40,60));
 
 blockArray.push(new block(2185,100,200,30));
 
-blockArray.push(new block(2305,240,40,60));
+blockArray.push(new block(2305,290,40,60));
 
 blockArray.push(new block(2430,100,40,100));
 
-blockArray.push(new block(2555,200,40,100));
+blockArray.push(new block(2535,250,40,100));
+
+blockArray.push(new block(2650,100,40,100));
+
 
 
 
@@ -222,11 +225,17 @@ ctx.fillStyle = 'gray';
 ctx.fillRect(-drift, 305, 1200, 400);
 ctx.strokeRect(-drift, 305, 1200, 400);
 
-ctx.fillRect(-drift + 1200,355,1200,400);
-ctx.strokeRect(-drift + 1200,355,1200,400);
+ctx.fillRect(-drift + 1200,355,800,400);
+ctx.strokeRect(-drift + 1200,355,800,400);
 
-ctx.fillRect(-drift + 1600, 305, 1200, 400);
-ctx.strokeRect(-drift + 1600, 305, 1200, 400);
+ctx.fillRect(-drift + 1600, 305, 580, 400);
+ctx.strokeRect(-drift + 1600, 305, 580, 400);
+
+ctx.fillRect(-drift + 2180,355,800,400);
+ctx.strokeRect(-drift + 2180,355,800,400);
+
+ctx.fillRect(-drift + 2580, 305, 580, 400);
+ctx.strokeRect(-drift + 2580, 305, 580, 400);
 
 ctx.fillStyle = 'gray';
 ctx.strokeRect(0, -300, 800, 395);
@@ -248,7 +257,9 @@ else{grounded = 0;}
 if (drift > 900){lowGround = 350;}
 if (drift > 1260){lowGround = 300;}
 
+if (drift > 1850){lowGround = 350;}
 
+if (drift > 2230){lowGround = 300;}
 
 
 for(var i = 0; i < blockArray.length ; i++) {
