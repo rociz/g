@@ -87,7 +87,7 @@ function getCursorPosition(canvas, event) {
 const canvas = document.querySelector('canvas')
 canvas.addEventListener('mousedown', function(e) {
     gravity = gravity + 1; 
-	//if (scene == 0){console.log(firstlevel.currentTime);}
+	if (scene == 0){console.log(firstlevel.currentTime);}
 	if (gravity == 2){gravity = 0;}
 	scene = 1; 
     getCursorPosition(canvas, e)
@@ -102,8 +102,7 @@ var block = function(x,y,w,h,v) {
     this.y = y;
     this.w = w;
     this.h = h;
-	this.v = v; 
-    
+	this.v = v;   
 };
 
 block.prototype.draw = function() {
@@ -126,6 +125,33 @@ block.prototype.draw = function() {
 		}
 	}
 };
+
+
+var ezblock = function(dir,x,lowG,hiG,width,height) {
+    this.x = x;
+    this.lowG = lowG;
+	this.hiG = hiG; 
+	this.height = height;
+	this.width = width; 
+	this.dir = dir; 
+};
+
+ezblock.prototype.draw = function() {
+
+if (this.dir == 1){
+blockArray.push(new block(this.x,this.hiG,this.width,this.height));
+}
+
+if (this.dir == 0){
+blockArray.push(new block(this.x,this.lowG - this.height,this.width,this.height));
+}
+
+}
+
+ezArray = [];
+
+//ezArray.push(new ezblock(0,700,300,100,50,100));
+
 
 
 blockArray.push(new block(250,100,400,50));
@@ -164,7 +190,7 @@ blockArray.push(new block(2060,100,40,100));
 
 blockArray.push(new block(2190,290,40,60));
 
-blockArray.push(new block(2185,100,200,30));
+blockArray.push(new block(2185,100,200,50));
 
 blockArray.push(new block(2305,290,40,60));
 
@@ -174,7 +200,35 @@ blockArray.push(new block(2535,250,40,100));
 
 blockArray.push(new block(2650,100,40,100));
 
+//NEXT BLOCK
 
+blockArray.push(new block(2770,200,40,100));
+
+blockArray.push(new block(2880,100,40,100));
+
+blockArray.push(new block(2990,200,40,100));
+
+blockArray.push(new block(3090,100,40,100));
+
+
+//NEXT BLOCK
+
+blockArray.push(new block(3200,100,40,70));
+
+blockArray.push(new block(3300,250,40,100));
+
+blockArray.push(new block(3400,100,40,100));
+
+blockArray.push(new block(3500,250,40,100));
+
+blockArray.push(new block(3610,100,40,100));
+
+//EPIC BLOCKS
+//var ezblock = function(dir,x,lowG,hiG,width,height) {
+
+ezArray.push(new ezblock(0,3730,350,100,40,100));
+
+ezArray.push(new ezblock(1,3830,350,100,40,100));
 
 
 var px = 300;
@@ -237,6 +291,9 @@ ctx.strokeRect(-drift + 2180,355,800,400);
 ctx.fillRect(-drift + 2580, 305, 580, 400);
 ctx.strokeRect(-drift + 2580, 305, 580, 400);
 
+ctx.fillRect(-drift + 3160,355,800,400);
+ctx.strokeRect(-drift + 3160,355,800,400);
+
 ctx.fillStyle = 'gray';
 ctx.strokeRect(0, -300, 800, 395);
 ctx.fillRect(0, -300, 800, 395);
@@ -261,9 +318,16 @@ if (drift > 1850){lowGround = 350;}
 
 if (drift > 2230){lowGround = 300;}
 
+if (drift > 2860){lowGround = 350;}
+
+
 
 for(var i = 0; i < blockArray.length ; i++) {
         blockArray[i].draw();
+}
+
+for(var i = 0; i < ezArray.length ; i++) {
+        ezArray[i].draw();
 }
 
 ctx.font = "20px Arial";
@@ -271,7 +335,7 @@ ctx.fillStyle = 'white';
 //ctx.fillText("x: " + mosx.toFixed(0) + "," + " y: " + mosy.toFixed(0), 10, 40);
 //ctx.fillText(firstlevel.currentTime.toFixed(2), 10, 70);
 
-ctx.fillText(drift, 10, 70);
+ctx.fillText("Drift: " + drift + "   Low Ground: " + lowGround, 10, 70);
 
 }
 
