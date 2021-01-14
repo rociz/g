@@ -138,14 +138,23 @@ var ezblock = function(dir,x,lowG,hiG,width,height) {
 
 ezblock.prototype.draw = function() {
 
-if (this.dir == 1){
-blockArray.push(new block(this.x,this.hiG,this.width,this.height));
-}
-
 if (this.dir == 0){
-blockArray.push(new block(this.x,this.lowG - this.height,this.width,this.height));
-}
 
+if (gravity == 1){ctx.fillStyle = "green";}
+    else{ctx.fillStyle = "#781b04";}
+    ctx.fillRect(this.x - drift,this.lowG - this.height,this.width,this.height);
+	
+	ctx.lineWidth = 5;
+    if (gravity == 1){ctx.strokeStyle = "#42f560";}
+	else {ctx.strokeStyle = "red";}
+    ctx.strokeRect(this.x - drift,this.lowG - this.height,this.width,this.height);
+	}
+	
+	if (px + 35 > this.x - drift && px < this.x - drift + this.width){
+		if (py >= this.lowG - this.height && py + 10 <= this.lowG - this.height + this.height){
+		firstlevel.pause(); firstlevel.currentTime = 0; drift = 0; px = 300; py = 270; gravity = 1; scene = 0; lowGround = 300; highGround = 100;
+		}
+	}
 }
 
 ezArray = [];
@@ -228,7 +237,8 @@ blockArray.push(new block(3610,100,40,100));
 
 ezArray.push(new ezblock(0,3730,350,100,40,100));
 
-ezArray.push(new ezblock(1,3830,350,100,40,100));
+blockArray.push(new  block(3830,100,40,100));
+
 
 
 var px = 300;
